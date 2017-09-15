@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="365e290132124b2cac830356926f02fa" Name="Diagram1">
+        <EntityTypeShape EntityType="WP.SIITGSG2.UserDomainCoreModel.Delegation" Width="1.5" PointX="3" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="WP.SIITGSG2.UserDomainCoreModel.dUserProfiles" Width="1.5" PointX="15" PointY="6.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="WP.SIITGSG2.UserDomainCoreModel.mAccessLog" Width="1.5" PointX="9.75" PointY="10.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="WP.SIITGSG2.UserDomainCoreModel.mAccessTemplates" Width="1.5" PointX="12.75" PointY="6" IsExpanded="true" />
+        <EntityTypeShape EntityType="WP.SIITGSG2.UserDomainCoreModel.mApplications" Width="1.5" PointX="5.25" PointY="8.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="WP.SIITGSG2.UserDomainCoreModel.mOperations" Width="1.5" PointX="7.5" PointY="13.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="WP.SIITGSG2.UserDomainCoreModel.mProfiles" Width="1.5" PointX="12.75" PointY="10.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="WP.SIITGSG2.UserDomainCoreModel.mSmartCardRoles" Width="1.5" PointX="6" PointY="17.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="WP.SIITGSG2.UserDomainCoreModel.mSmartCards" Width="1.5" PointX="8.25" PointY="5.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="WP.SIITGSG2.UserDomainCoreModel.mStatus" Width="1.5" PointX="3" PointY="9" IsExpanded="true" />
+        <EntityTypeShape EntityType="WP.SIITGSG2.UserDomainCoreModel.mStatusTypes" Width="1.5" PointX="0.75" PointY="9.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="WP.SIITGSG2.UserDomainCoreModel.mUsers" Width="1.5" PointX="5.25" PointY="1.5" IsExpanded="true" />
+        <AssociationConnector Association="WP.SIITGSG2.UserDomainCoreModel.FK_dUserProfiles_mAccessTemplates" ManuallyRouted="false" />
+        <AssociationConnector Association="WP.SIITGSG2.UserDomainCoreModel.FK_dUserProfiles_mProfiles" ManuallyRouted="false" />
+        <AssociationConnector Association="WP.SIITGSG2.UserDomainCoreModel.FK_dUserProfiles_mUsers" ManuallyRouted="false" />
+        <AssociationConnector Association="WP.SIITGSG2.UserDomainCoreModel.FK_mAccessLog_mApplications" ManuallyRouted="false" />
+        <AssociationConnector Association="WP.SIITGSG2.UserDomainCoreModel.FK_mAccessLog_mOperations" ManuallyRouted="false" />
+        <AssociationConnector Association="WP.SIITGSG2.UserDomainCoreModel.FK_mAccessLog_mProfiles" ManuallyRouted="false" />
+        <AssociationConnector Association="WP.SIITGSG2.UserDomainCoreModel.FK_mAccessLog_mUsers" ManuallyRouted="false" />
+        <AssociationConnector Association="WP.SIITGSG2.UserDomainCoreModel.FK_mApplications_mStatus" ManuallyRouted="false" />
+        <AssociationConnector Association="WP.SIITGSG2.UserDomainCoreModel.FK_mOperations_mApplications" ManuallyRouted="false" />
+        <AssociationConnector Association="WP.SIITGSG2.UserDomainCoreModel.FK_mProfiles_mApplications" ManuallyRouted="false" />
+        <AssociationConnector Association="WP.SIITGSG2.UserDomainCoreModel.FK_mProfiles_mStatus" ManuallyRouted="false" />
+        <AssociationConnector Association="WP.SIITGSG2.UserDomainCoreModel.FK_mSmartCards_mSmartCardRoles" ManuallyRouted="false" />
+        <AssociationConnector Association="WP.SIITGSG2.UserDomainCoreModel.FK_mSmartCards_mStatus" ManuallyRouted="false" />
+        <AssociationConnector Association="WP.SIITGSG2.UserDomainCoreModel.FK_mSmartCards_mUsers" ManuallyRouted="false" />
+        <AssociationConnector Association="WP.SIITGSG2.UserDomainCoreModel.FK_mStatus_mStatusTypes" ManuallyRouted="false" />
+        <AssociationConnector Association="WP.SIITGSG2.UserDomainCoreModel.FK_mUsers_mStatus" ManuallyRouted="false" />
+        <AssociationConnector Association="WP.SIITGSG2.UserDomainCoreModel.dProfileOperations" ManuallyRouted="false" />
+        <AssociationConnector Association="WP.SIITGSG2.UserDomainCoreModel.UserDelegations" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

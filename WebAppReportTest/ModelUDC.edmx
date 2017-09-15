@@ -1,0 +1,1168 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="WP.SIITGSG2.UserDomainCoreModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Delegation">
+          <Key>
+            <PropertyRef Name="DelegationID" />
+          </Key>
+          <Property Name="DelegationID" Type="tinyint" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="120" Nullable="false" />
+        </EntityType>
+        <EntityType Name="dProfileOperations">
+          <Key>
+            <PropertyRef Name="ProfileID" />
+            <PropertyRef Name="OperationID" />
+          </Key>
+          <Property Name="ProfileID" Type="int" Nullable="false" />
+          <Property Name="OperationID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="dUserProfiles">
+          <Key>
+            <PropertyRef Name="UserID" />
+            <PropertyRef Name="ProfileID" />
+          </Key>
+          <Property Name="UserID" Type="int" Nullable="false" />
+          <Property Name="ProfileID" Type="int" Nullable="false" />
+          <Property Name="AccessTemplateID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="mAccessLog">
+          <Key>
+            <PropertyRef Name="AccessLogID" />
+          </Key>
+          <Property Name="AccessLogID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserID" Type="int" Nullable="false" />
+          <Property Name="UserName" Type="varchar" MaxLength="127" />
+          <Property Name="ProfileID" Type="int" Nullable="false" />
+          <Property Name="ProfileName" Type="varchar" MaxLength="50" />
+          <Property Name="OperationID" Type="int" Nullable="false" />
+          <Property Name="CreationDate" Type="datetime" Nullable="false" />
+          <Property Name="UserLogin" Type="varchar" MaxLength="50" />
+          <Property Name="ApplicationID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="mAccessTemplates">
+          <Key>
+            <PropertyRef Name="AccessTemplateID" />
+          </Key>
+          <Property Name="AccessTemplateID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Monday" Type="varchar" MaxLength="6" Nullable="false" />
+          <Property Name="Tuesday" Type="varchar" MaxLength="6" Nullable="false" />
+          <Property Name="Wednesday" Type="varchar" MaxLength="6" Nullable="false" />
+          <Property Name="Thursday" Type="varchar" MaxLength="6" Nullable="false" />
+          <Property Name="Friday" Type="varchar" MaxLength="6" Nullable="false" />
+          <Property Name="Saturday" Type="varchar" MaxLength="6" Nullable="false" />
+          <Property Name="Sunday" Type="varchar" MaxLength="6" Nullable="false" />
+          <Property Name="IsReadOnly" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="mApplications">
+          <Key>
+            <PropertyRef Name="ApplicationID" />
+          </Key>
+          <Property Name="ApplicationID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Type" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="Origin" Type="varchar" MaxLength="255" />
+          <Property Name="Version" Type="varchar" MaxLength="30" />
+          <Property Name="ReleaseDate" Type="datetime" />
+          <Property Name="IsReadOnly" Type="bit" Nullable="false" />
+          <Property Name="ManagesDelagations" Type="bit" Nullable="false" />
+          <Property Name="StatusID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="mOperations">
+          <Key>
+            <PropertyRef Name="OperationID" />
+          </Key>
+          <Property Name="OperationID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ApplicationID" Type="int" Nullable="false" />
+          <Property Name="SysOperation" Type="int" Nullable="false" />
+          <Property Name="IsReadOnly" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="mProfiles">
+          <Key>
+            <PropertyRef Name="ProfileID" />
+          </Key>
+          <Property Name="ProfileID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ApplicationID" Type="int" Nullable="false" />
+          <Property Name="IsReadOnly" Type="bit" Nullable="false" />
+          <Property Name="StatusID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="mSmartCardRoles">
+          <Key>
+            <PropertyRef Name="RoleID" />
+          </Key>
+          <Property Name="RoleID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Role" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="mSmartCards">
+          <Key>
+            <PropertyRef Name="SmartCardID" />
+          </Key>
+          <Property Name="SmartCardID" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="Pin" Type="varchar" MaxLength="4" Nullable="false" />
+          <Property Name="UserID" Type="int" Nullable="false" />
+          <Property Name="RoleID" Type="int" Nullable="false" />
+          <Property Name="CreationDate" Type="datetime" Nullable="false" />
+          <Property Name="Expiration" Type="datetime" Nullable="false" />
+          <Property Name="StatusID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="mStatus">
+          <Key>
+            <PropertyRef Name="StatusID" />
+          </Key>
+          <Property Name="StatusID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Type" Type="int" />
+        </EntityType>
+        <EntityType Name="mStatusTypes">
+          <Key>
+            <PropertyRef Name="TypeID" />
+          </Key>
+          <Property Name="TypeID" Type="int" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="mUsers">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="LastName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Surname" Type="varchar" MaxLength="50" />
+          <Property Name="Address" Type="varchar" MaxLength="100" />
+          <Property Name="ZipCode" Type="int" />
+          <Property Name="Email" Type="varchar" MaxLength="120" Nullable="false" />
+          <Property Name="Organization" Type="varchar" MaxLength="50" />
+          <Property Name="Position" Type="varchar" MaxLength="50" />
+          <Property Name="ShortName" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="Login" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Password" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Sex" Type="int" Nullable="false" />
+          <Property Name="StatusID" Type="int" Nullable="false" />
+          <Property Name="CreateDate" Type="datetime" Nullable="false" />
+          <Property Name="IsReadOnly" Type="bit" Nullable="false" />
+          <Property Name="IsFirstSession" Type="bit" Nullable="false" />
+          <Property Name="IsActiveSession" Type="bit" Nullable="false" />
+          <Property Name="LastLogin" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserDelegations">
+          <Key>
+            <PropertyRef Name="UserID" />
+            <PropertyRef Name="DelegationID" />
+          </Key>
+          <Property Name="UserID" Type="int" Nullable="false" />
+          <Property Name="DelegationID" Type="tinyint" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_dProfileOperations_mOperations">
+          <End Role="mOperations" Type="Self.mOperations" Multiplicity="1" />
+          <End Role="dProfileOperations" Type="Self.dProfileOperations" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="mOperations">
+              <PropertyRef Name="OperationID" />
+            </Principal>
+            <Dependent Role="dProfileOperations">
+              <PropertyRef Name="OperationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dProfileOperations_mProfiles">
+          <End Role="mProfiles" Type="Self.mProfiles" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="dProfileOperations" Type="Self.dProfileOperations" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="mProfiles">
+              <PropertyRef Name="ProfileID" />
+            </Principal>
+            <Dependent Role="dProfileOperations">
+              <PropertyRef Name="ProfileID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dUserProfiles_mAccessTemplates">
+          <End Role="mAccessTemplates" Type="Self.mAccessTemplates" Multiplicity="1" />
+          <End Role="dUserProfiles" Type="Self.dUserProfiles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="mAccessTemplates">
+              <PropertyRef Name="AccessTemplateID" />
+            </Principal>
+            <Dependent Role="dUserProfiles">
+              <PropertyRef Name="AccessTemplateID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dUserProfiles_mProfiles">
+          <End Role="mProfiles" Type="Self.mProfiles" Multiplicity="1" />
+          <End Role="dUserProfiles" Type="Self.dUserProfiles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="mProfiles">
+              <PropertyRef Name="ProfileID" />
+            </Principal>
+            <Dependent Role="dUserProfiles">
+              <PropertyRef Name="ProfileID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dUserProfiles_mUsers">
+          <End Role="mUsers" Type="Self.mUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="dUserProfiles" Type="Self.dUserProfiles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="mUsers">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="dUserProfiles">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_mAccessLog_mApplications">
+          <End Role="mApplications" Type="Self.mApplications" Multiplicity="1" />
+          <End Role="mAccessLog" Type="Self.mAccessLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="mApplications">
+              <PropertyRef Name="ApplicationID" />
+            </Principal>
+            <Dependent Role="mAccessLog">
+              <PropertyRef Name="ApplicationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_mAccessLog_mOperations">
+          <End Role="mOperations" Type="Self.mOperations" Multiplicity="1" />
+          <End Role="mAccessLog" Type="Self.mAccessLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="mOperations">
+              <PropertyRef Name="OperationID" />
+            </Principal>
+            <Dependent Role="mAccessLog">
+              <PropertyRef Name="OperationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_mAccessLog_mProfiles">
+          <End Role="mProfiles" Type="Self.mProfiles" Multiplicity="1" />
+          <End Role="mAccessLog" Type="Self.mAccessLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="mProfiles">
+              <PropertyRef Name="ProfileID" />
+            </Principal>
+            <Dependent Role="mAccessLog">
+              <PropertyRef Name="ProfileID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_mAccessLog_mUsers">
+          <End Role="mUsers" Type="Self.mUsers" Multiplicity="1" />
+          <End Role="mAccessLog" Type="Self.mAccessLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="mUsers">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="mAccessLog">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_mApplications_mStatus">
+          <End Role="mStatus" Type="Self.mStatus" Multiplicity="1" />
+          <End Role="mApplications" Type="Self.mApplications" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="mStatus">
+              <PropertyRef Name="StatusID" />
+            </Principal>
+            <Dependent Role="mApplications">
+              <PropertyRef Name="StatusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_mOperations_mApplications">
+          <End Role="mApplications" Type="Self.mApplications" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="mOperations" Type="Self.mOperations" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="mApplications">
+              <PropertyRef Name="ApplicationID" />
+            </Principal>
+            <Dependent Role="mOperations">
+              <PropertyRef Name="ApplicationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_mProfiles_mApplications">
+          <End Role="mApplications" Type="Self.mApplications" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="mProfiles" Type="Self.mProfiles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="mApplications">
+              <PropertyRef Name="ApplicationID" />
+            </Principal>
+            <Dependent Role="mProfiles">
+              <PropertyRef Name="ApplicationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_mProfiles_mStatus">
+          <End Role="mStatus" Type="Self.mStatus" Multiplicity="1" />
+          <End Role="mProfiles" Type="Self.mProfiles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="mStatus">
+              <PropertyRef Name="StatusID" />
+            </Principal>
+            <Dependent Role="mProfiles">
+              <PropertyRef Name="StatusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_mSmartCards_mSmartCardRoles">
+          <End Role="mSmartCardRoles" Type="Self.mSmartCardRoles" Multiplicity="1" />
+          <End Role="mSmartCards" Type="Self.mSmartCards" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="mSmartCardRoles">
+              <PropertyRef Name="RoleID" />
+            </Principal>
+            <Dependent Role="mSmartCards">
+              <PropertyRef Name="RoleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_mSmartCards_mStatus">
+          <End Role="mStatus" Type="Self.mStatus" Multiplicity="1" />
+          <End Role="mSmartCards" Type="Self.mSmartCards" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="mStatus">
+              <PropertyRef Name="StatusID" />
+            </Principal>
+            <Dependent Role="mSmartCards">
+              <PropertyRef Name="StatusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_mSmartCards_mUsers">
+          <End Role="mUsers" Type="Self.mUsers" Multiplicity="1" />
+          <End Role="mSmartCards" Type="Self.mSmartCards" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="mUsers">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="mSmartCards">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_mStatus_mStatusTypes">
+          <End Role="mStatusTypes" Type="Self.mStatusTypes" Multiplicity="0..1" />
+          <End Role="mStatus" Type="Self.mStatus" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="mStatusTypes">
+              <PropertyRef Name="TypeID" />
+            </Principal>
+            <Dependent Role="mStatus">
+              <PropertyRef Name="Type" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_mUsers_mStatus">
+          <End Role="mStatus" Type="Self.mStatus" Multiplicity="1" />
+          <End Role="mUsers" Type="Self.mUsers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="mStatus">
+              <PropertyRef Name="StatusID" />
+            </Principal>
+            <Dependent Role="mUsers">
+              <PropertyRef Name="StatusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UsuarioDelegacion_Delegacion">
+          <End Role="Delegation" Type="Self.Delegation" Multiplicity="1" />
+          <End Role="UserDelegations" Type="Self.UserDelegations" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Delegation">
+              <PropertyRef Name="DelegationID" />
+            </Principal>
+            <Dependent Role="UserDelegations">
+              <PropertyRef Name="DelegationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UsuarioDelegacion_mUsers">
+          <End Role="mUsers" Type="Self.mUsers" Multiplicity="1" />
+          <End Role="UserDelegations" Type="Self.UserDelegations" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="mUsers">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="UserDelegations">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="WPSIITGSG2UserDomainCoreModelStoreContainer">
+          <EntitySet Name="Delegation" EntityType="Self.Delegation" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="dProfileOperations" EntityType="Self.dProfileOperations" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="dUserProfiles" EntityType="Self.dUserProfiles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="mAccessLog" EntityType="Self.mAccessLog" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="mAccessTemplates" EntityType="Self.mAccessTemplates" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="mApplications" EntityType="Self.mApplications" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="mOperations" EntityType="Self.mOperations" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="mProfiles" EntityType="Self.mProfiles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="mSmartCardRoles" EntityType="Self.mSmartCardRoles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="mSmartCards" EntityType="Self.mSmartCards" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="mStatus" EntityType="Self.mStatus" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="mStatusTypes" EntityType="Self.mStatusTypes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="mUsers" EntityType="Self.mUsers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserDelegations" EntityType="Self.UserDelegations" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_dProfileOperations_mOperations" Association="Self.FK_dProfileOperations_mOperations">
+            <End Role="mOperations" EntitySet="mOperations" />
+            <End Role="dProfileOperations" EntitySet="dProfileOperations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dProfileOperations_mProfiles" Association="Self.FK_dProfileOperations_mProfiles">
+            <End Role="mProfiles" EntitySet="mProfiles" />
+            <End Role="dProfileOperations" EntitySet="dProfileOperations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dUserProfiles_mAccessTemplates" Association="Self.FK_dUserProfiles_mAccessTemplates">
+            <End Role="mAccessTemplates" EntitySet="mAccessTemplates" />
+            <End Role="dUserProfiles" EntitySet="dUserProfiles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dUserProfiles_mProfiles" Association="Self.FK_dUserProfiles_mProfiles">
+            <End Role="mProfiles" EntitySet="mProfiles" />
+            <End Role="dUserProfiles" EntitySet="dUserProfiles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dUserProfiles_mUsers" Association="Self.FK_dUserProfiles_mUsers">
+            <End Role="mUsers" EntitySet="mUsers" />
+            <End Role="dUserProfiles" EntitySet="dUserProfiles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_mAccessLog_mApplications" Association="Self.FK_mAccessLog_mApplications">
+            <End Role="mApplications" EntitySet="mApplications" />
+            <End Role="mAccessLog" EntitySet="mAccessLog" />
+          </AssociationSet>
+          <AssociationSet Name="FK_mAccessLog_mOperations" Association="Self.FK_mAccessLog_mOperations">
+            <End Role="mOperations" EntitySet="mOperations" />
+            <End Role="mAccessLog" EntitySet="mAccessLog" />
+          </AssociationSet>
+          <AssociationSet Name="FK_mAccessLog_mProfiles" Association="Self.FK_mAccessLog_mProfiles">
+            <End Role="mProfiles" EntitySet="mProfiles" />
+            <End Role="mAccessLog" EntitySet="mAccessLog" />
+          </AssociationSet>
+          <AssociationSet Name="FK_mAccessLog_mUsers" Association="Self.FK_mAccessLog_mUsers">
+            <End Role="mUsers" EntitySet="mUsers" />
+            <End Role="mAccessLog" EntitySet="mAccessLog" />
+          </AssociationSet>
+          <AssociationSet Name="FK_mApplications_mStatus" Association="Self.FK_mApplications_mStatus">
+            <End Role="mStatus" EntitySet="mStatus" />
+            <End Role="mApplications" EntitySet="mApplications" />
+          </AssociationSet>
+          <AssociationSet Name="FK_mOperations_mApplications" Association="Self.FK_mOperations_mApplications">
+            <End Role="mApplications" EntitySet="mApplications" />
+            <End Role="mOperations" EntitySet="mOperations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_mProfiles_mApplications" Association="Self.FK_mProfiles_mApplications">
+            <End Role="mApplications" EntitySet="mApplications" />
+            <End Role="mProfiles" EntitySet="mProfiles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_mProfiles_mStatus" Association="Self.FK_mProfiles_mStatus">
+            <End Role="mStatus" EntitySet="mStatus" />
+            <End Role="mProfiles" EntitySet="mProfiles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_mSmartCards_mSmartCardRoles" Association="Self.FK_mSmartCards_mSmartCardRoles">
+            <End Role="mSmartCardRoles" EntitySet="mSmartCardRoles" />
+            <End Role="mSmartCards" EntitySet="mSmartCards" />
+          </AssociationSet>
+          <AssociationSet Name="FK_mSmartCards_mStatus" Association="Self.FK_mSmartCards_mStatus">
+            <End Role="mStatus" EntitySet="mStatus" />
+            <End Role="mSmartCards" EntitySet="mSmartCards" />
+          </AssociationSet>
+          <AssociationSet Name="FK_mSmartCards_mUsers" Association="Self.FK_mSmartCards_mUsers">
+            <End Role="mUsers" EntitySet="mUsers" />
+            <End Role="mSmartCards" EntitySet="mSmartCards" />
+          </AssociationSet>
+          <AssociationSet Name="FK_mStatus_mStatusTypes" Association="Self.FK_mStatus_mStatusTypes">
+            <End Role="mStatusTypes" EntitySet="mStatusTypes" />
+            <End Role="mStatus" EntitySet="mStatus" />
+          </AssociationSet>
+          <AssociationSet Name="FK_mUsers_mStatus" Association="Self.FK_mUsers_mStatus">
+            <End Role="mStatus" EntitySet="mStatus" />
+            <End Role="mUsers" EntitySet="mUsers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UsuarioDelegacion_Delegacion" Association="Self.FK_UsuarioDelegacion_Delegacion">
+            <End Role="Delegation" EntitySet="Delegation" />
+            <End Role="UserDelegations" EntitySet="UserDelegations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UsuarioDelegacion_mUsers" Association="Self.FK_UsuarioDelegacion_mUsers">
+            <End Role="mUsers" EntitySet="mUsers" />
+            <End Role="UserDelegations" EntitySet="UserDelegations" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="WP.SIITGSG2.UserDomainCoreModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Delegation">
+          <Key>
+            <PropertyRef Name="DelegationID" />
+          </Key>
+          <Property Name="DelegationID" Type="Byte" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="120" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="mUsers" Relationship="Self.UserDelegations" FromRole="Delegation" ToRole="mUsers" />
+        </EntityType>
+        <EntityType Name="dUserProfiles">
+          <Key>
+            <PropertyRef Name="UserID" />
+            <PropertyRef Name="ProfileID" />
+          </Key>
+          <Property Name="UserID" Type="Int32" Nullable="false" />
+          <Property Name="ProfileID" Type="Int32" Nullable="false" />
+          <Property Name="AccessTemplateID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="mAccessTemplates" Relationship="Self.FK_dUserProfiles_mAccessTemplates" FromRole="dUserProfiles" ToRole="mAccessTemplates" />
+          <NavigationProperty Name="mProfiles" Relationship="Self.FK_dUserProfiles_mProfiles" FromRole="dUserProfiles" ToRole="mProfiles" />
+          <NavigationProperty Name="mUsers" Relationship="Self.FK_dUserProfiles_mUsers" FromRole="dUserProfiles" ToRole="mUsers" />
+        </EntityType>
+        <EntityType Name="mAccessLog">
+          <Key>
+            <PropertyRef Name="AccessLogID" />
+          </Key>
+          <Property Name="AccessLogID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserID" Type="Int32" Nullable="false" />
+          <Property Name="UserName" Type="String" MaxLength="127" FixedLength="false" Unicode="false" />
+          <Property Name="ProfileID" Type="Int32" Nullable="false" />
+          <Property Name="ProfileName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="OperationID" Type="Int32" Nullable="false" />
+          <Property Name="CreationDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UserLogin" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ApplicationID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="mApplications" Relationship="Self.FK_mAccessLog_mApplications" FromRole="mAccessLog" ToRole="mApplications" />
+          <NavigationProperty Name="mOperations" Relationship="Self.FK_mAccessLog_mOperations" FromRole="mAccessLog" ToRole="mOperations" />
+          <NavigationProperty Name="mProfiles" Relationship="Self.FK_mAccessLog_mProfiles" FromRole="mAccessLog" ToRole="mProfiles" />
+          <NavigationProperty Name="mUsers" Relationship="Self.FK_mAccessLog_mUsers" FromRole="mAccessLog" ToRole="mUsers" />
+        </EntityType>
+        <EntityType Name="mAccessTemplates">
+          <Key>
+            <PropertyRef Name="AccessTemplateID" />
+          </Key>
+          <Property Name="AccessTemplateID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Monday" Type="String" MaxLength="6" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Tuesday" Type="String" MaxLength="6" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Wednesday" Type="String" MaxLength="6" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Thursday" Type="String" MaxLength="6" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Friday" Type="String" MaxLength="6" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Saturday" Type="String" MaxLength="6" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Sunday" Type="String" MaxLength="6" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="IsReadOnly" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="dUserProfiles" Relationship="Self.FK_dUserProfiles_mAccessTemplates" FromRole="mAccessTemplates" ToRole="dUserProfiles" />
+        </EntityType>
+        <EntityType Name="mApplications">
+          <Key>
+            <PropertyRef Name="ApplicationID" />
+          </Key>
+          <Property Name="ApplicationID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Type" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Origin" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Version" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="ReleaseDate" Type="DateTime" Precision="3" />
+          <Property Name="IsReadOnly" Type="Boolean" Nullable="false" />
+          <Property Name="ManagesDelagations" Type="Boolean" Nullable="false" />
+          <Property Name="StatusID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="mAccessLog" Relationship="Self.FK_mAccessLog_mApplications" FromRole="mApplications" ToRole="mAccessLog" />
+          <NavigationProperty Name="mStatus" Relationship="Self.FK_mApplications_mStatus" FromRole="mApplications" ToRole="mStatus" />
+          <NavigationProperty Name="mOperations" Relationship="Self.FK_mOperations_mApplications" FromRole="mApplications" ToRole="mOperations" />
+          <NavigationProperty Name="mProfiles" Relationship="Self.FK_mProfiles_mApplications" FromRole="mApplications" ToRole="mProfiles" />
+        </EntityType>
+        <EntityType Name="mOperations">
+          <Key>
+            <PropertyRef Name="OperationID" />
+          </Key>
+          <Property Name="OperationID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ApplicationID" Type="Int32" Nullable="false" />
+          <Property Name="SysOperation" Type="Int32" Nullable="false" />
+          <Property Name="IsReadOnly" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="mAccessLog" Relationship="Self.FK_mAccessLog_mOperations" FromRole="mOperations" ToRole="mAccessLog" />
+          <NavigationProperty Name="mApplications" Relationship="Self.FK_mOperations_mApplications" FromRole="mOperations" ToRole="mApplications" />
+          <NavigationProperty Name="mProfiles" Relationship="Self.dProfileOperations" FromRole="mOperations" ToRole="mProfiles" />
+        </EntityType>
+        <EntityType Name="mProfiles">
+          <Key>
+            <PropertyRef Name="ProfileID" />
+          </Key>
+          <Property Name="ProfileID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ApplicationID" Type="Int32" Nullable="false" />
+          <Property Name="IsReadOnly" Type="Boolean" Nullable="false" />
+          <Property Name="StatusID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="dUserProfiles" Relationship="Self.FK_dUserProfiles_mProfiles" FromRole="mProfiles" ToRole="dUserProfiles" />
+          <NavigationProperty Name="mAccessLog" Relationship="Self.FK_mAccessLog_mProfiles" FromRole="mProfiles" ToRole="mAccessLog" />
+          <NavigationProperty Name="mApplications" Relationship="Self.FK_mProfiles_mApplications" FromRole="mProfiles" ToRole="mApplications" />
+          <NavigationProperty Name="mStatus" Relationship="Self.FK_mProfiles_mStatus" FromRole="mProfiles" ToRole="mStatus" />
+          <NavigationProperty Name="mOperations" Relationship="Self.dProfileOperations" FromRole="mProfiles" ToRole="mOperations" />
+        </EntityType>
+        <EntityType Name="mSmartCardRoles">
+          <Key>
+            <PropertyRef Name="RoleID" />
+          </Key>
+          <Property Name="RoleID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Role" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="mSmartCards" Relationship="Self.FK_mSmartCards_mSmartCardRoles" FromRole="mSmartCardRoles" ToRole="mSmartCards" />
+        </EntityType>
+        <EntityType Name="mSmartCards">
+          <Key>
+            <PropertyRef Name="SmartCardID" />
+          </Key>
+          <Property Name="SmartCardID" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Pin" Type="String" MaxLength="4" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="UserID" Type="Int32" Nullable="false" />
+          <Property Name="RoleID" Type="Int32" Nullable="false" />
+          <Property Name="CreationDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Expiration" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="StatusID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="mSmartCardRoles" Relationship="Self.FK_mSmartCards_mSmartCardRoles" FromRole="mSmartCards" ToRole="mSmartCardRoles" />
+          <NavigationProperty Name="mStatus" Relationship="Self.FK_mSmartCards_mStatus" FromRole="mSmartCards" ToRole="mStatus" />
+          <NavigationProperty Name="mUsers" Relationship="Self.FK_mSmartCards_mUsers" FromRole="mSmartCards" ToRole="mUsers" />
+        </EntityType>
+        <EntityType Name="mStatus">
+          <Key>
+            <PropertyRef Name="StatusID" />
+          </Key>
+          <Property Name="StatusID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Type" Type="Int32" />
+          <NavigationProperty Name="mApplications" Relationship="Self.FK_mApplications_mStatus" FromRole="mStatus" ToRole="mApplications" />
+          <NavigationProperty Name="mProfiles" Relationship="Self.FK_mProfiles_mStatus" FromRole="mStatus" ToRole="mProfiles" />
+          <NavigationProperty Name="mSmartCards" Relationship="Self.FK_mSmartCards_mStatus" FromRole="mStatus" ToRole="mSmartCards" />
+          <NavigationProperty Name="mStatusTypes" Relationship="Self.FK_mStatus_mStatusTypes" FromRole="mStatus" ToRole="mStatusTypes" />
+          <NavigationProperty Name="mUsers" Relationship="Self.FK_mUsers_mStatus" FromRole="mStatus" ToRole="mUsers" />
+        </EntityType>
+        <EntityType Name="mStatusTypes">
+          <Key>
+            <PropertyRef Name="TypeID" />
+          </Key>
+          <Property Name="TypeID" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="mStatus" Relationship="Self.FK_mStatus_mStatusTypes" FromRole="mStatusTypes" ToRole="mStatus" />
+        </EntityType>
+        <EntityType Name="mUsers">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Surname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Address" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ZipCode" Type="Int32" />
+          <Property Name="Email" Type="String" MaxLength="120" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Organization" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Position" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ShortName" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Login" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Sex" Type="Int32" Nullable="false" />
+          <Property Name="StatusID" Type="Int32" Nullable="false" />
+          <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IsReadOnly" Type="Boolean" Nullable="false" />
+          <Property Name="IsFirstSession" Type="Boolean" Nullable="false" />
+          <Property Name="IsActiveSession" Type="Boolean" Nullable="false" />
+          <Property Name="LastLogin" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="dUserProfiles" Relationship="Self.FK_dUserProfiles_mUsers" FromRole="mUsers" ToRole="dUserProfiles" />
+          <NavigationProperty Name="mAccessLog" Relationship="Self.FK_mAccessLog_mUsers" FromRole="mUsers" ToRole="mAccessLog" />
+          <NavigationProperty Name="mSmartCards" Relationship="Self.FK_mSmartCards_mUsers" FromRole="mUsers" ToRole="mSmartCards" />
+          <NavigationProperty Name="mStatus" Relationship="Self.FK_mUsers_mStatus" FromRole="mUsers" ToRole="mStatus" />
+          <NavigationProperty Name="Delegation" Relationship="Self.UserDelegations" FromRole="mUsers" ToRole="Delegation" />
+        </EntityType>
+        <Association Name="FK_dUserProfiles_mAccessTemplates">
+          <End Role="mAccessTemplates" Type="Self.mAccessTemplates" Multiplicity="1" />
+          <End Role="dUserProfiles" Type="Self.dUserProfiles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="mAccessTemplates">
+              <PropertyRef Name="AccessTemplateID" />
+            </Principal>
+            <Dependent Role="dUserProfiles">
+              <PropertyRef Name="AccessTemplateID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dUserProfiles_mProfiles">
+          <End Role="mProfiles" Type="Self.mProfiles" Multiplicity="1" />
+          <End Role="dUserProfiles" Type="Self.dUserProfiles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="mProfiles">
+              <PropertyRef Name="ProfileID" />
+            </Principal>
+            <Dependent Role="dUserProfiles">
+              <PropertyRef Name="ProfileID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dUserProfiles_mUsers">
+          <End Role="mUsers" Type="Self.mUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="dUserProfiles" Type="Self.dUserProfiles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="mUsers">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="dUserProfiles">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_mAccessLog_mApplications">
+          <End Role="mApplications" Type="Self.mApplications" Multiplicity="1" />
+          <End Role="mAccessLog" Type="Self.mAccessLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="mApplications">
+              <PropertyRef Name="ApplicationID" />
+            </Principal>
+            <Dependent Role="mAccessLog">
+              <PropertyRef Name="ApplicationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_mAccessLog_mOperations">
+          <End Role="mOperations" Type="Self.mOperations" Multiplicity="1" />
+          <End Role="mAccessLog" Type="Self.mAccessLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="mOperations">
+              <PropertyRef Name="OperationID" />
+            </Principal>
+            <Dependent Role="mAccessLog">
+              <PropertyRef Name="OperationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_mAccessLog_mProfiles">
+          <End Role="mProfiles" Type="Self.mProfiles" Multiplicity="1" />
+          <End Role="mAccessLog" Type="Self.mAccessLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="mProfiles">
+              <PropertyRef Name="ProfileID" />
+            </Principal>
+            <Dependent Role="mAccessLog">
+              <PropertyRef Name="ProfileID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_mAccessLog_mUsers">
+          <End Role="mUsers" Type="Self.mUsers" Multiplicity="1" />
+          <End Role="mAccessLog" Type="Self.mAccessLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="mUsers">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="mAccessLog">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_mApplications_mStatus">
+          <End Role="mStatus" Type="Self.mStatus" Multiplicity="1" />
+          <End Role="mApplications" Type="Self.mApplications" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="mStatus">
+              <PropertyRef Name="StatusID" />
+            </Principal>
+            <Dependent Role="mApplications">
+              <PropertyRef Name="StatusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_mOperations_mApplications">
+          <End Role="mApplications" Type="Self.mApplications" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="mOperations" Type="Self.mOperations" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="mApplications">
+              <PropertyRef Name="ApplicationID" />
+            </Principal>
+            <Dependent Role="mOperations">
+              <PropertyRef Name="ApplicationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_mProfiles_mApplications">
+          <End Role="mApplications" Type="Self.mApplications" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="mProfiles" Type="Self.mProfiles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="mApplications">
+              <PropertyRef Name="ApplicationID" />
+            </Principal>
+            <Dependent Role="mProfiles">
+              <PropertyRef Name="ApplicationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_mProfiles_mStatus">
+          <End Role="mStatus" Type="Self.mStatus" Multiplicity="1" />
+          <End Role="mProfiles" Type="Self.mProfiles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="mStatus">
+              <PropertyRef Name="StatusID" />
+            </Principal>
+            <Dependent Role="mProfiles">
+              <PropertyRef Name="StatusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_mSmartCards_mSmartCardRoles">
+          <End Role="mSmartCardRoles" Type="Self.mSmartCardRoles" Multiplicity="1" />
+          <End Role="mSmartCards" Type="Self.mSmartCards" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="mSmartCardRoles">
+              <PropertyRef Name="RoleID" />
+            </Principal>
+            <Dependent Role="mSmartCards">
+              <PropertyRef Name="RoleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_mSmartCards_mStatus">
+          <End Role="mStatus" Type="Self.mStatus" Multiplicity="1" />
+          <End Role="mSmartCards" Type="Self.mSmartCards" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="mStatus">
+              <PropertyRef Name="StatusID" />
+            </Principal>
+            <Dependent Role="mSmartCards">
+              <PropertyRef Name="StatusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_mSmartCards_mUsers">
+          <End Role="mUsers" Type="Self.mUsers" Multiplicity="1" />
+          <End Role="mSmartCards" Type="Self.mSmartCards" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="mUsers">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="mSmartCards">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_mStatus_mStatusTypes">
+          <End Role="mStatusTypes" Type="Self.mStatusTypes" Multiplicity="0..1" />
+          <End Role="mStatus" Type="Self.mStatus" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="mStatusTypes">
+              <PropertyRef Name="TypeID" />
+            </Principal>
+            <Dependent Role="mStatus">
+              <PropertyRef Name="Type" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_mUsers_mStatus">
+          <End Role="mStatus" Type="Self.mStatus" Multiplicity="1" />
+          <End Role="mUsers" Type="Self.mUsers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="mStatus">
+              <PropertyRef Name="StatusID" />
+            </Principal>
+            <Dependent Role="mUsers">
+              <PropertyRef Name="StatusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="dProfileOperations">
+          <End Role="mOperations" Type="Self.mOperations" Multiplicity="*" />
+          <End Role="mProfiles" Type="Self.mProfiles" Multiplicity="*" />
+        </Association>
+        <Association Name="UserDelegations">
+          <End Role="Delegation" Type="Self.Delegation" Multiplicity="*" />
+          <End Role="mUsers" Type="Self.mUsers" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="Entities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Delegation" EntityType="Self.Delegation" />
+          <EntitySet Name="dUserProfiles" EntityType="Self.dUserProfiles" />
+          <EntitySet Name="mAccessLog" EntityType="Self.mAccessLog" />
+          <EntitySet Name="mAccessTemplates" EntityType="Self.mAccessTemplates" />
+          <EntitySet Name="mApplications" EntityType="Self.mApplications" />
+          <EntitySet Name="mOperations" EntityType="Self.mOperations" />
+          <EntitySet Name="mProfiles" EntityType="Self.mProfiles" />
+          <EntitySet Name="mSmartCardRoles" EntityType="Self.mSmartCardRoles" />
+          <EntitySet Name="mSmartCards" EntityType="Self.mSmartCards" />
+          <EntitySet Name="mStatus" EntityType="Self.mStatus" />
+          <EntitySet Name="mStatusTypes" EntityType="Self.mStatusTypes" />
+          <EntitySet Name="mUsers" EntityType="Self.mUsers" />
+          <AssociationSet Name="FK_dUserProfiles_mAccessTemplates" Association="Self.FK_dUserProfiles_mAccessTemplates">
+            <End Role="mAccessTemplates" EntitySet="mAccessTemplates" />
+            <End Role="dUserProfiles" EntitySet="dUserProfiles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dUserProfiles_mProfiles" Association="Self.FK_dUserProfiles_mProfiles">
+            <End Role="mProfiles" EntitySet="mProfiles" />
+            <End Role="dUserProfiles" EntitySet="dUserProfiles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dUserProfiles_mUsers" Association="Self.FK_dUserProfiles_mUsers">
+            <End Role="mUsers" EntitySet="mUsers" />
+            <End Role="dUserProfiles" EntitySet="dUserProfiles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_mAccessLog_mApplications" Association="Self.FK_mAccessLog_mApplications">
+            <End Role="mApplications" EntitySet="mApplications" />
+            <End Role="mAccessLog" EntitySet="mAccessLog" />
+          </AssociationSet>
+          <AssociationSet Name="FK_mAccessLog_mOperations" Association="Self.FK_mAccessLog_mOperations">
+            <End Role="mOperations" EntitySet="mOperations" />
+            <End Role="mAccessLog" EntitySet="mAccessLog" />
+          </AssociationSet>
+          <AssociationSet Name="FK_mAccessLog_mProfiles" Association="Self.FK_mAccessLog_mProfiles">
+            <End Role="mProfiles" EntitySet="mProfiles" />
+            <End Role="mAccessLog" EntitySet="mAccessLog" />
+          </AssociationSet>
+          <AssociationSet Name="FK_mAccessLog_mUsers" Association="Self.FK_mAccessLog_mUsers">
+            <End Role="mUsers" EntitySet="mUsers" />
+            <End Role="mAccessLog" EntitySet="mAccessLog" />
+          </AssociationSet>
+          <AssociationSet Name="FK_mApplications_mStatus" Association="Self.FK_mApplications_mStatus">
+            <End Role="mStatus" EntitySet="mStatus" />
+            <End Role="mApplications" EntitySet="mApplications" />
+          </AssociationSet>
+          <AssociationSet Name="FK_mOperations_mApplications" Association="Self.FK_mOperations_mApplications">
+            <End Role="mApplications" EntitySet="mApplications" />
+            <End Role="mOperations" EntitySet="mOperations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_mProfiles_mApplications" Association="Self.FK_mProfiles_mApplications">
+            <End Role="mApplications" EntitySet="mApplications" />
+            <End Role="mProfiles" EntitySet="mProfiles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_mProfiles_mStatus" Association="Self.FK_mProfiles_mStatus">
+            <End Role="mStatus" EntitySet="mStatus" />
+            <End Role="mProfiles" EntitySet="mProfiles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_mSmartCards_mSmartCardRoles" Association="Self.FK_mSmartCards_mSmartCardRoles">
+            <End Role="mSmartCardRoles" EntitySet="mSmartCardRoles" />
+            <End Role="mSmartCards" EntitySet="mSmartCards" />
+          </AssociationSet>
+          <AssociationSet Name="FK_mSmartCards_mStatus" Association="Self.FK_mSmartCards_mStatus">
+            <End Role="mStatus" EntitySet="mStatus" />
+            <End Role="mSmartCards" EntitySet="mSmartCards" />
+          </AssociationSet>
+          <AssociationSet Name="FK_mSmartCards_mUsers" Association="Self.FK_mSmartCards_mUsers">
+            <End Role="mUsers" EntitySet="mUsers" />
+            <End Role="mSmartCards" EntitySet="mSmartCards" />
+          </AssociationSet>
+          <AssociationSet Name="FK_mStatus_mStatusTypes" Association="Self.FK_mStatus_mStatusTypes">
+            <End Role="mStatusTypes" EntitySet="mStatusTypes" />
+            <End Role="mStatus" EntitySet="mStatus" />
+          </AssociationSet>
+          <AssociationSet Name="FK_mUsers_mStatus" Association="Self.FK_mUsers_mStatus">
+            <End Role="mStatus" EntitySet="mStatus" />
+            <End Role="mUsers" EntitySet="mUsers" />
+          </AssociationSet>
+          <AssociationSet Name="dProfileOperations" Association="Self.dProfileOperations">
+            <End Role="mOperations" EntitySet="mOperations" />
+            <End Role="mProfiles" EntitySet="mProfiles" />
+          </AssociationSet>
+          <AssociationSet Name="UserDelegations" Association="Self.UserDelegations">
+            <End Role="Delegation" EntitySet="Delegation" />
+            <End Role="mUsers" EntitySet="mUsers" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="WPSIITGSG2UserDomainCoreModelStoreContainer" CdmEntityContainer="Entities1">
+          <EntitySetMapping Name="Delegation">
+            <EntityTypeMapping TypeName="WP.SIITGSG2.UserDomainCoreModel.Delegation">
+              <MappingFragment StoreEntitySet="Delegation">
+                <ScalarProperty Name="DelegationID" ColumnName="DelegationID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="dUserProfiles">
+            <EntityTypeMapping TypeName="WP.SIITGSG2.UserDomainCoreModel.dUserProfiles">
+              <MappingFragment StoreEntitySet="dUserProfiles">
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="ProfileID" ColumnName="ProfileID" />
+                <ScalarProperty Name="AccessTemplateID" ColumnName="AccessTemplateID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="mAccessLog">
+            <EntityTypeMapping TypeName="WP.SIITGSG2.UserDomainCoreModel.mAccessLog">
+              <MappingFragment StoreEntitySet="mAccessLog">
+                <ScalarProperty Name="AccessLogID" ColumnName="AccessLogID" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="ProfileID" ColumnName="ProfileID" />
+                <ScalarProperty Name="ProfileName" ColumnName="ProfileName" />
+                <ScalarProperty Name="OperationID" ColumnName="OperationID" />
+                <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
+                <ScalarProperty Name="UserLogin" ColumnName="UserLogin" />
+                <ScalarProperty Name="ApplicationID" ColumnName="ApplicationID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="mAccessTemplates">
+            <EntityTypeMapping TypeName="WP.SIITGSG2.UserDomainCoreModel.mAccessTemplates">
+              <MappingFragment StoreEntitySet="mAccessTemplates">
+                <ScalarProperty Name="AccessTemplateID" ColumnName="AccessTemplateID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Monday" ColumnName="Monday" />
+                <ScalarProperty Name="Tuesday" ColumnName="Tuesday" />
+                <ScalarProperty Name="Wednesday" ColumnName="Wednesday" />
+                <ScalarProperty Name="Thursday" ColumnName="Thursday" />
+                <ScalarProperty Name="Friday" ColumnName="Friday" />
+                <ScalarProperty Name="Saturday" ColumnName="Saturday" />
+                <ScalarProperty Name="Sunday" ColumnName="Sunday" />
+                <ScalarProperty Name="IsReadOnly" ColumnName="IsReadOnly" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="mApplications">
+            <EntityTypeMapping TypeName="WP.SIITGSG2.UserDomainCoreModel.mApplications">
+              <MappingFragment StoreEntitySet="mApplications">
+                <ScalarProperty Name="ApplicationID" ColumnName="ApplicationID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Origin" ColumnName="Origin" />
+                <ScalarProperty Name="Version" ColumnName="Version" />
+                <ScalarProperty Name="ReleaseDate" ColumnName="ReleaseDate" />
+                <ScalarProperty Name="IsReadOnly" ColumnName="IsReadOnly" />
+                <ScalarProperty Name="ManagesDelagations" ColumnName="ManagesDelagations" />
+                <ScalarProperty Name="StatusID" ColumnName="StatusID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="mOperations">
+            <EntityTypeMapping TypeName="WP.SIITGSG2.UserDomainCoreModel.mOperations">
+              <MappingFragment StoreEntitySet="mOperations">
+                <ScalarProperty Name="OperationID" ColumnName="OperationID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ApplicationID" ColumnName="ApplicationID" />
+                <ScalarProperty Name="SysOperation" ColumnName="SysOperation" />
+                <ScalarProperty Name="IsReadOnly" ColumnName="IsReadOnly" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="mProfiles">
+            <EntityTypeMapping TypeName="WP.SIITGSG2.UserDomainCoreModel.mProfiles">
+              <MappingFragment StoreEntitySet="mProfiles">
+                <ScalarProperty Name="ProfileID" ColumnName="ProfileID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ApplicationID" ColumnName="ApplicationID" />
+                <ScalarProperty Name="IsReadOnly" ColumnName="IsReadOnly" />
+                <ScalarProperty Name="StatusID" ColumnName="StatusID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="mSmartCardRoles">
+            <EntityTypeMapping TypeName="WP.SIITGSG2.UserDomainCoreModel.mSmartCardRoles">
+              <MappingFragment StoreEntitySet="mSmartCardRoles">
+                <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+                <ScalarProperty Name="Role" ColumnName="Role" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="mSmartCards">
+            <EntityTypeMapping TypeName="WP.SIITGSG2.UserDomainCoreModel.mSmartCards">
+              <MappingFragment StoreEntitySet="mSmartCards">
+                <ScalarProperty Name="SmartCardID" ColumnName="SmartCardID" />
+                <ScalarProperty Name="Pin" ColumnName="Pin" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+                <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
+                <ScalarProperty Name="Expiration" ColumnName="Expiration" />
+                <ScalarProperty Name="StatusID" ColumnName="StatusID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="mStatus">
+            <EntityTypeMapping TypeName="WP.SIITGSG2.UserDomainCoreModel.mStatus">
+              <MappingFragment StoreEntitySet="mStatus">
+                <ScalarProperty Name="StatusID" ColumnName="StatusID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="mStatusTypes">
+            <EntityTypeMapping TypeName="WP.SIITGSG2.UserDomainCoreModel.mStatusTypes">
+              <MappingFragment StoreEntitySet="mStatusTypes">
+                <ScalarProperty Name="TypeID" ColumnName="TypeID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="mUsers">
+            <EntityTypeMapping TypeName="WP.SIITGSG2.UserDomainCoreModel.mUsers">
+              <MappingFragment StoreEntitySet="mUsers">
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Surname" ColumnName="Surname" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="ZipCode" ColumnName="ZipCode" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Organization" ColumnName="Organization" />
+                <ScalarProperty Name="Position" ColumnName="Position" />
+                <ScalarProperty Name="ShortName" ColumnName="ShortName" />
+                <ScalarProperty Name="Login" ColumnName="Login" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Sex" ColumnName="Sex" />
+                <ScalarProperty Name="StatusID" ColumnName="StatusID" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="IsReadOnly" ColumnName="IsReadOnly" />
+                <ScalarProperty Name="IsFirstSession" ColumnName="IsFirstSession" />
+                <ScalarProperty Name="IsActiveSession" ColumnName="IsActiveSession" />
+                <ScalarProperty Name="LastLogin" ColumnName="LastLogin" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="dProfileOperations" TypeName="WP.SIITGSG2.UserDomainCoreModel.dProfileOperations" StoreEntitySet="dProfileOperations">
+            <EndProperty Name="mOperations">
+              <ScalarProperty Name="OperationID" ColumnName="OperationID" />
+            </EndProperty>
+            <EndProperty Name="mProfiles">
+              <ScalarProperty Name="ProfileID" ColumnName="ProfileID" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="UserDelegations" TypeName="WP.SIITGSG2.UserDomainCoreModel.UserDelegations" StoreEntitySet="UserDelegations">
+            <EndProperty Name="Delegation">
+              <ScalarProperty Name="DelegationID" ColumnName="DelegationID" />
+            </EndProperty>
+            <EndProperty Name="mUsers">
+              <ScalarProperty Name="UserID" ColumnName="UserID" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
