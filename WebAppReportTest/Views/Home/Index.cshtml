@@ -26,21 +26,12 @@
 
     @if (Model != null)
     {
-        @Html.ActionLink("Descargar en Excel", "GenerateAndDisplayReport", new { territory = Model.Id, format = "Excel" })
-
-        @*<section class="border col-md-12">
-            <img src="@Url.Action("GenerateAndDisplayReport", "Home", new { territory = Model.Id, format = Model.Format  })" />
-
-        </section>*@
-        @*<section class="wrapper col-md-12">
-            <embed src="@Url.Action("GenerateAndDisplayReportPDF", "Home", new { parameter = Model.Id })"   class="iFramePdf"  type="application/pdf" allowfullscreen="true" />
-        </section>*@
-
+        @Html.ActionLink("Descargar en Excel", "GenerateAndDisplayReportExcel", new { parameter = Model.Id })
+        
         <div class="wrapper">
             <div class="h_iframe">
                 <iframe src="@Url.Action("GenerateAndDisplayReportPDF", "Home", new { parameter = Model.Id })"  type="application/pdf" allowfullscreen  />
-            </div>
-         
+            </div>         
         </div>
     }
 

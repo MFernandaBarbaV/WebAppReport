@@ -20,25 +20,15 @@ namespace WebAppReportTest.Controllers
             return View();
         }
 
-        [AllowAnonymous]
-        public ActionResult ReportViewer(string returnUrl)
-        {
-            ViewBag.ReturnUrl = returnUrl;
-            return View();
-        }
-
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public ViewResult ReportViewer(SearchParameterModel um)
+        public ViewResult ReportViewer(SearchParameterModel model)
         {
-            return View("Index", um);
+            return View("Index", model);
         }
 
-        private IList<Stream> m_streams = new List<Stream>();
-
-
-        public FileContentResult GenerateAndDisplayReport(string territory, string format)
+        public FileContentResult GenerateAndDisplayReportExcel(string parameter)
         {
             LocalReport localReport = new LocalReport();
             localReport.ReportPath = Server.MapPath("~/Content/Report1.rdlc");
@@ -47,8 +37,8 @@ namespace WebAppReportTest.Controllers
             reportDataSource.Name = "DataSet1";
             using (Entities1 db = new Entities1())
             {
-                if (territory != null)
-                    reportDataSource.Value = db.mUsers.Where(u => u.UserID.ToString() == territory).ToList();
+                if (parameter != null)
+                    reportDataSource.Value = db.mUsers.Where(u => u.UserID.ToString() == parameter).ToList();
                 else
                     reportDataSource.Value = db.mUsers.ToList();
             }
@@ -59,11 +49,11 @@ namespace WebAppReportTest.Controllers
             reportDataSource2.Name = "DataSet2";
             using (Entities1 db = new Entities1())
             {
-                if (territory != null)
-                    reportDataSource2.Value = db.mOperations.Where(u => u.OperationID.ToString() == territory).ToList();
+                if (parameter != null)
+                    reportDataSource2.Value = db.mOperations.Where(u => u.OperationID.ToString() == parameter).ToList();
                 else
                     reportDataSource2.Value = db.mOperations.ToList();
-             
+
             }
 
             localReport.DataSources.Add(reportDataSource2);
@@ -76,81 +66,16 @@ namespace WebAppReportTest.Controllers
             Warning[] warnings;
             string[] streams = new string[10];
             byte[] renderedBytes = null;
-
-            string deviceInfo =
-        "<DeviceInfo>" +
-          "  <OutputFormat>EMF</OutputFormat>" +
-          "  <PageWidth>8.5in</PageWidth>" +
-          "  <PageHeight>11in</PageHeight>" +
-          "  <MarginTop>0.25in</MarginTop>" +
-          "  <MarginLeft>0.25in</MarginLeft>" +
-          "  <MarginRight>0.25in</MarginRight>" +
-          "  <MarginBottom>0.25in</MarginBottom>" +
-          "</DeviceInfo>";
-
+            
             //Render the report
 
-            if (format == null)
-            {
-                renderedBytes = localReport.Render(reportType, null, out mimeType, out encoding, out fileNameExtension, out streams, out warnings);
-                //   renderedBytes = localReport.Render("Image", deviceInfo, PageCountMode.Estimate, out mimeType, out encoding, out fileNameExtension, out streams, out warnings);
+            renderedBytes = localReport.Render("Excel", null, out mimeType, out encoding, out fileNameExtension, out streams, out warnings);
+            Response.AddHeader("content-disposition", "attachment; filename=NorthWindCustomers.xls");
 
-                //  localReport.Render("Image", deviceInfo, CreateStream, out warnings);
-                Response.AddHeader("content-disposition", "attachment; filename=NorthWindCustomers.tif");
-
-                //while (m_streams.Count() == 0)
-                //    Thread.Sleep(50);
-
-                //Image imageFile = Image.FromFile("Report1_0.EMF");
-                //Graphics newGraphics = Graphics.FromImage(imageFile);
-                //newGraphics.FillRectangle(new SolidBrush(Color.Black), 100, 50, 100, 100);
-
-                //for (int i = 0; i < m_streams.Count; i++)
-                //{
-
-                //    m_streams[i].Flush();
-                //    m_streams[i].Close();
-                //    m_streams[i].Dispose();
-
-                //    newGraphics.DrawImage(new Bitmap("Report1_" + i + ".EMF"), new PointF(0.0F, 0.0F));
-
-
-                //}
-
-                //newGraphics.Save();
-
-                int pages = localReport.GetTotalPages();
-
-                return File(renderedBytes, "image/tiff");
-
-            }
-            else if (format.ToUpper() == "PDF")
-            {
-                renderedBytes = localReport.Render("pdf", null, out mimeType, out encoding, out fileNameExtension, out streams, out warnings);
-                //   Response.AddHeader("content-disposition", "attachment; filename=NorthWindCustomers.pdf");
-
-                Response.AddHeader("content-disposition", "inline; filename=MyFile.pdf");
-
-
-
-                return File(renderedBytes, "application/pdf");
-            }
-            else if (format.ToUpper() == "EXCEL")
-            {
-                renderedBytes = localReport.Render("Excel", null, out mimeType, out encoding, out fileNameExtension, out streams, out warnings);
-                Response.AddHeader("content-disposition", "attachment; filename=NorthWindCustomers.xls");
-
-                return File(renderedBytes, "application/vnd.ms-excel");
-            }
-            else
-            {
-                renderedBytes = localReport.Render(reportType, null, out mimeType, out encoding, out fileNameExtension, out streams, out warnings);
-                return File(renderedBytes, "image/jpeg");
-            }
+            return File(renderedBytes, "application/vnd.ms-excel");
         }
-
-
-        public ActionResult GenerateAndDisplayReportPDF(string parameter)
+        
+        public FileContentResult GenerateAndDisplayReportPDF(string parameter)
         {
             LocalReport localReport = new LocalReport();
             localReport.ReportPath = Server.MapPath("~/Content/Report1.rdlc");
@@ -185,39 +110,17 @@ namespace WebAppReportTest.Controllers
             string[] streams = new string[10];
             byte[] renderedBytes = null;
             //Render the report
-            renderedBytes = localReport.Render("pdf", null, out mimeType, out encoding, out fileNameExtension, out streams, out warnings);          
+            renderedBytes = localReport.Render("pdf", null, out mimeType, out encoding, out fileNameExtension, out streams, out warnings);
             Response.Clear();
-            Response.AddHeader("Content - Disposition","inline; filename = sample.pdf");
-            Response.AddHeader("Content - Type","application / pdf");
+            Response.AddHeader("Content - Disposition", "inline; filename = sample.pdf");
+            Response.AddHeader("Content - Type", "application / pdf");
             Response.ClearHeaders();
             Response.AddHeader("Content - Length", renderedBytes.Length.ToString());
             return new FileContentResult(renderedBytes, "application/pdf");
         }
-        private Stream CreateStream(string name, string fileNameExtension, Encoding encoding, string mimeType, bool willSeek)
-        {
-            Stream stream = new FileStream(name + "." + fileNameExtension, FileMode.OpenOrCreate);
-            m_streams.Add(stream);
-            return stream;
-        }
 
-        public static byte[] ImageToByte(Image img)
-        {
-            ImageConverter converter = new ImageConverter();
-            return (byte[])converter.ConvertTo(img, typeof(byte[]));
-        }
 
-        public static byte[] ReadFully(Stream input)
-        {
-            byte[] buffer = new byte[16 * 1024];
-            using (MemoryStream ms = new MemoryStream())
-            {
-                int read;
-                while ((read = input.Read(buffer, 0, buffer.Length)) > 0)
-                {
-                    ms.Write(buffer, 0, read);
-                }
-                return ms.ToArray();
-            }
-        }
+
+
     }
 }
