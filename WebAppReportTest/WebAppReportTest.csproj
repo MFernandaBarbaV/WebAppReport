@@ -208,6 +208,17 @@
       <DependentUpon>ModelUDC.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="spmOperations_GetAll_Result.cs">
+      <DependentUpon>ModelUDC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="spmOperations_GetByID_Result.cs">
+      <DependentUpon>ModelUDC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="_WP_SIITGSG2_UserDomainCoreDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>_WP_SIITGSG2_UserDomainCoreDataSet.xsd</DependentUpon>
+    </Compile>
     <Compile Include="_WP_SIITGSG2_UserDomainCoreDataSet1.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -270,6 +281,17 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="_WP_SIITGSG2_UserDomainCoreDataSet1.xsc">
       <DependentUpon>_WP_SIITGSG2_UserDomainCoreDataSet1.xsd</DependentUpon>
+    </Content>
+    <Content Include="_WP_SIITGSG2_UserDomainCoreDataSet.xsc">
+      <DependentUpon>_WP_SIITGSG2_UserDomainCoreDataSet.xsd</DependentUpon>
+    </Content>
+    <None Include="_WP_SIITGSG2_UserDomainCoreDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>_WP_SIITGSG2_UserDomainCoreDataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="_WP_SIITGSG2_UserDomainCoreDataSet.xss">
+      <DependentUpon>_WP_SIITGSG2_UserDomainCoreDataSet.xsd</DependentUpon>
     </Content>
     <None Include="_WP_SIITGSG2_UserDomainCoreDataSet1.xsd">
       <Generator>MSDataSetGenerator</Generator>

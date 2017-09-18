@@ -12,6 +12,8 @@ namespace WebAppReportTest
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using System.Data.Entity.Core.Objects;
+    using System.Linq;
     
     public partial class Entities1 : DbContext
     {
@@ -37,5 +39,19 @@ namespace WebAppReportTest
         public virtual DbSet<mStatus> mStatus { get; set; }
         public virtual DbSet<mStatusTypes> mStatusTypes { get; set; }
         public virtual DbSet<mUsers> mUsers { get; set; }
+    
+        public virtual ObjectResult<spmOperations_GetAll_Result> spmOperations_GetAll()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spmOperations_GetAll_Result>("spmOperations_GetAll");
+        }
+    
+        public virtual ObjectResult<spmOperations_GetByID_Result> spmOperations_GetByID(Nullable<int> operationID)
+        {
+            var operationIDParameter = operationID.HasValue ?
+                new ObjectParameter("OperationID", operationID) :
+                new ObjectParameter("OperationID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spmOperations_GetByID_Result>("spmOperations_GetByID", operationIDParameter);
+        }
     }
 }

@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="WP.SIITGSG2.UserDomainCoreModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="WP.SIITGSG2.UserDomainCoreModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Delegation">
           <Key>
             <PropertyRef Name="DelegationID" />
@@ -406,6 +406,10 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="spmOperations_GetAll" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="spmOperations_GetByID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="OperationID" Type="int" Mode="In" />
+        </Function>
         <EntityContainer Name="WPSIITGSG2UserDomainCoreModelStoreContainer">
           <EntitySet Name="Delegation" EntityType="Self.Delegation" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="dProfileOperations" EntityType="Self.dProfileOperations" Schema="dbo" store:Type="Tables" />
@@ -502,8 +506,7 @@
             <End Role="UserDelegations" EntitySet="UserDelegations" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="WP.SIITGSG2.UserDomainCoreModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -971,7 +974,43 @@
             <End Role="Delegation" EntitySet="Delegation" />
             <End Role="mUsers" EntitySet="mUsers" />
           </AssociationSet>
+          <FunctionImport Name="spmOperations_GetAll" ReturnType="Collection(WP.SIITGSG2.UserDomainCoreModel.spmOperations_GetAll_Result)" />
+          <FunctionImport Name="spmOperations_GetByID" ReturnType="Collection(WP.SIITGSG2.UserDomainCoreModel.spmOperations_GetByID_Result)">
+            <Parameter Name="OperationID" Mode="In" Type="Int32" />
+          </FunctionImport>
         </EntityContainer>
+        <ComplexType Name="spmOperations_GetAll_Result">
+          <Property Type="Int32" Name="OperationID" Nullable="false" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="ApplicationID" Nullable="false" />
+          <Property Type="Boolean" Name="IsReadOnly" Nullable="false" />
+          <Property Type="Int32" Name="SysOperation" Nullable="false" />
+          <Property Type="String" Name="AppName" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="AppType" Nullable="false" MaxLength="25" />
+          <Property Type="String" Name="AppOrigin" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="AppVersion" Nullable="true" MaxLength="30" />
+          <Property Type="DateTime" Name="AppReleaseDate" Nullable="true" Precision="23" />
+          <Property Type="Boolean" Name="AppIsReadOnly" Nullable="false" />
+          <Property Type="Int32" Name="AppStatusID" Nullable="false" />
+          <Property Type="String" Name="StatusName" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="StatusType" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="spmOperations_GetByID_Result">
+          <Property Type="Int32" Name="OperationID" Nullable="false" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="ApplicationID" Nullable="false" />
+          <Property Type="Boolean" Name="IsReadOnly" Nullable="false" />
+          <Property Type="Int32" Name="SysOperation" Nullable="false" />
+          <Property Type="String" Name="AppName" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="AppType" Nullable="false" MaxLength="25" />
+          <Property Type="String" Name="AppOrigin" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="AppVersion" Nullable="true" MaxLength="30" />
+          <Property Type="DateTime" Name="AppReleaseDate" Nullable="true" Precision="23" />
+          <Property Type="Boolean" Name="AppIsReadOnly" Nullable="false" />
+          <Property Type="Int32" Name="AppStatusID" Nullable="false" />
+          <Property Type="String" Name="StatusName" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="StatusType" Nullable="true" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1142,6 +1181,46 @@
               <ScalarProperty Name="UserID" ColumnName="UserID" />
             </EndProperty>
           </AssociationSetMapping>
+          <FunctionImportMapping FunctionImportName="spmOperations_GetAll" FunctionName="WP.SIITGSG2.UserDomainCoreModel.Store.spmOperations_GetAll">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="WP.SIITGSG2.UserDomainCoreModel.spmOperations_GetAll_Result">
+                <ScalarProperty Name="OperationID" ColumnName="OperationID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ApplicationID" ColumnName="ApplicationID" />
+                <ScalarProperty Name="IsReadOnly" ColumnName="IsReadOnly" />
+                <ScalarProperty Name="SysOperation" ColumnName="SysOperation" />
+                <ScalarProperty Name="AppName" ColumnName="AppName" />
+                <ScalarProperty Name="AppType" ColumnName="AppType" />
+                <ScalarProperty Name="AppOrigin" ColumnName="AppOrigin" />
+                <ScalarProperty Name="AppVersion" ColumnName="AppVersion" />
+                <ScalarProperty Name="AppReleaseDate" ColumnName="AppReleaseDate" />
+                <ScalarProperty Name="AppIsReadOnly" ColumnName="AppIsReadOnly" />
+                <ScalarProperty Name="AppStatusID" ColumnName="AppStatusID" />
+                <ScalarProperty Name="StatusName" ColumnName="StatusName" />
+                <ScalarProperty Name="StatusType" ColumnName="StatusType" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="spmOperations_GetByID" FunctionName="WP.SIITGSG2.UserDomainCoreModel.Store.spmOperations_GetByID">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="WP.SIITGSG2.UserDomainCoreModel.spmOperations_GetByID_Result">
+                <ScalarProperty Name="OperationID" ColumnName="OperationID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ApplicationID" ColumnName="ApplicationID" />
+                <ScalarProperty Name="IsReadOnly" ColumnName="IsReadOnly" />
+                <ScalarProperty Name="SysOperation" ColumnName="SysOperation" />
+                <ScalarProperty Name="AppName" ColumnName="AppName" />
+                <ScalarProperty Name="AppType" ColumnName="AppType" />
+                <ScalarProperty Name="AppOrigin" ColumnName="AppOrigin" />
+                <ScalarProperty Name="AppVersion" ColumnName="AppVersion" />
+                <ScalarProperty Name="AppReleaseDate" ColumnName="AppReleaseDate" />
+                <ScalarProperty Name="AppIsReadOnly" ColumnName="AppIsReadOnly" />
+                <ScalarProperty Name="AppStatusID" ColumnName="AppStatusID" />
+                <ScalarProperty Name="StatusName" ColumnName="StatusName" />
+                <ScalarProperty Name="StatusType" ColumnName="StatusType" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
